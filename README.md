@@ -1,4 +1,4 @@
-# womengeeknews
+# ITs Girls!
 Building web application to display news about women in technology. 
 App will fetch data about women from few news APIs (like BBC, The Guardian etc.). 
 
