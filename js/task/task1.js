@@ -12,6 +12,7 @@
 
 // Select all the elements with the attribute class=" classname "
 // Important!!! Returns an array even if it finds only one element or none!!!
+//Magda ==> Why it is so iportant? It this selector: $('body')doesnt' return an array? If not, why this is so important?
 
   $('.classname');
 
