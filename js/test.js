@@ -1,8 +1,7 @@
 // Please write here your instructions
 // One after the other, no functions. ;)
 
-$(document).ready(function() { /*I know that you told "forget about what we said about functions". 
-//That was also a part of resolving problem with ReferenceError with body. More about it in point 3. */
+$(document).ready(function() { 
 
 //1. I created new element ==> div
 var body = $('body');	
@@ -32,8 +31,7 @@ newLink.appendTo(newDiv);
 var newImage = $('<img></img>');
 newImage.appendTo(newDiv);
 newImage.attr({
-    "src": "https://avatars0.githubusercontent.com/u/8046557", //I am not sure when I should use double quotes and when single
-    "alt": "This is me!!!"
+    "src": "https://avatars0.githubusercontent.com/u/8046557", 
     });
 
 newDiv.appendTo(body);
