@@ -1,19 +1,20 @@
-(function(){
+var magdaApp = angular.module('magdaApp', []);
 
-var myArray = ["title", "name", "age"]
-
-$(function(){
-    $.getJSON('url', function(data) {
-        console.log(data);
-    });
+magdaApp.controller('MagdaController', function($scope, $rootScope, GuardianService){
+	$scope.name = 'Magda';
+	GuardianService.getPublicFeed().then(function(response){
+		console.log(response);
+		$scope.feed = response.data;
+	}, function(response){
+		console.log('No data!');
+	});
 });
-
-
-function createFunction() {
-    var piece = document.createElement("P");
-    var descPiece = document.createTextNode("This is a paragraph");
-    piece.appendChild(descPiece);    
-    document.body.appendChild(piece);
-
-
-document.getElementById("myElement").appendChild(piece); 
+magdaApp.factory('GuardianService', ['$http', function($http){
+	var service = {
+		getPublicFeed: function(){
+			var url = 'http://content.guardianapis.com/search?page-size=50&order-by=newest&q=women%20and%20tech&api-key=27f66131-9496-4cf7-b259-f054e97beedc';
+			return $http.get(url); 
+		}
+	};
+	return service;
+}]); 
