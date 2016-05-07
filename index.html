@@ -1,19 +1,42 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
-</head>
-<body ng-app="magdaApp">
-	<div ng-controller="MagdaController">
-		<div ng-repeat="item in feed.response.results">
-			<p>{{item.webTitle}}</p>
-			<a href="{{item.webUrl}}">Klick mi!</a>
+	<head>
+		<!-- other -->
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- descriptive -->
+		<title>ITs Girls!</title>
+		<meta name="description" content="News app about girls in tech">
+		<meta name="author" content="girls in tech">
+		<meta name="keywords" content="HTML,CSS,JavaScript,AngularJS">
+		
+		<!-- bootstrap css & fonts -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+		<link href='https://fonts.googleapis.com/css?family=Lato:400,700,300' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="style/main.css">
+		
+	</head>
+	<body ng-app="ItsGirlsApp">
+		<div class="container">
+			<div class="page-header">
+				<h1>ITs Girls! <small>News app about women and girls in tech</small></h1>
+				<h4>Project made as a part of <a href="https://www.learnitgirl.com">Learn IT Girl!</a> A mentorship program for women around the globe!</h4>
+			</div>
+			<div ng-controller="ItsGirlsController">
+				<ul class="list-group">
+					<li class="list-group-item" ng-repeat="item in feed.response.results">
+						<h3>{{item.webTitle}}</h3>
+						<h4>Section name: {{item.sectionName}}</h4>
+						<a href="http://www.theguardian.com/uk"><span class="badge">Source: The Guardian</span></a>
+						<h4>Publication date: {{item.webPublicationDate}}</h4>
+						<a href="{{item.webUrl}}">Read the full story</a>
+					</li>
+					
+				</ul>
+			</div>
 		</div>
-	</div>
-
-	
-	
-<script type="text/javascript" src="js/app.js"></script>
-</body>
-
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+		<script type="text/javascript" src="js/app.js"></script>
+	</body>
 </html>
