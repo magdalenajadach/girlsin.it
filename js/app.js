@@ -67,7 +67,7 @@ ItsGirlsApp.controller('ItsGirlsController', function($scope, $rootScope, Guardi
 ItsGirlsApp.factory('GuardianService', ['$http', function($http){
 	var service = {
 		getPublicFeed: function(){
-			var url = 'http://content.guardianapis.com/search?page-size=50&order-by=newest&q=women%20and%20tech&api-key=27f66131-9496-4cf7-b259-f054e97beedc';
+			var url = 'http://content.guardianapis.com/search?order-by=newest&q=tech%20and%20women&api-key=27f66131-9496-4cf7-b259-f054e97beedc';
 			return $http.get(url); 
 		}
 	};
