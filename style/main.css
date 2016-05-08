@@ -13,6 +13,23 @@ html, body {
     margin: 0 auto 10px auto;
 }
 
-ul {
+h1 {
+	color: #FA1F02;
+}
+
+ul li {
 	margin-bottom: 15px;
+}
+
+a {
+	color: #008ae6;
+}
+
+a:hover {
+	color: #FA1F02;
+	text-decoration: none;
+}
+
+.badge {
+	background: #FA1F02;
 }
