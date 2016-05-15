@@ -1,6 +1,6 @@
-var ItsGirlsApp = angular.module('ItsGirlsApp', []);
+var GirlsInItApp = angular.module('GirlsInItApp', []);
 
-ItsGirlsApp.controller('ItsGirlsController', function($scope, $rootScope, GuardianService, NewYorksTimesService){
+GirlsInItApp.controller('GirlsInItController', function($scope, $rootScope, GuardianService, NewYorksTimesService){
 	
 	$scope.feed = {};
 	$scope.feed.results = [];
@@ -64,7 +64,7 @@ ItsGirlsApp.controller('ItsGirlsController', function($scope, $rootScope, Guardi
 });
 
 
-ItsGirlsApp.factory('GuardianService', ['$http', function($http){
+GirlsInItApp.factory('GuardianService', ['$http', function($http){
 	var service = {
 		getPublicFeed: function(){
 			var url = 'http://content.guardianapis.com/search?order-by=newest&q=tech%20and%20women&pageSize=30&api-key=27f66131-9496-4cf7-b259-f054e97beedc';
@@ -74,7 +74,7 @@ ItsGirlsApp.factory('GuardianService', ['$http', function($http){
 	return service;
 }]); 
 
-ItsGirlsApp.factory('NewYorksTimesService', ['$http', function($http){
+GirlsInItApp.factory('NewYorksTimesService', ['$http', function($http){
 	var service = {
 		getPublicFeed: function(){
 			var url = 'http://api.nytimes.com/svc/search/v2/articlesearch.json?q=women&fq=tech&sort=newest&api-key=5da3b2f28d4f421da53c9edab39514b4';
@@ -84,10 +84,18 @@ ItsGirlsApp.factory('NewYorksTimesService', ['$http', function($http){
 	return service;
 }]);
 
-ItsGirlsApp.directive('header', function() {
+GirlsInItApp.directive('header', function() {
   return {
     restrict: 'A',
     replace: true,
-    templateUrl: "header.html"
+    templateUrl: "views/header.html"
+  }
+});
+
+GirlsInItApp.directive('footer', function() {
+  return {
+    restrict: 'A',
+    replace: true,
+    templateUrl: "views/footer.html"
   }
 });
