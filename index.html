@@ -29,10 +29,10 @@
 					<li class="list-group-item" ng-repeat="item in feed.results" ng-if="isVisible(item)">
 						<h3>{{item.title}}</h3>
 						<h4>Section name: {{item.section}}</h4>
-						<a ng-if="item.source == 'GUARDIAN'" href="http://www.theguardian.com/uk"><span class="badge">Source: The Guardian</span></a>
-						<a ng-if="item.source == 'NYT'" href="http://www.nytimes.com/"><span class="badge">Source: The New York Times</span></a>
+						<a ng-if="item.source == 'GUARDIAN'" href="http://www.theguardian.com/uk" target="_blank"><span class="badge">Source: The Guardian</span></a>
+						<a ng-if="item.source == 'NYT'" href="http://www.nytimes.com/" target="_blank"><span class="badge">Source: The New York Times</span></a>
 						<h4>Publication date: {{item.date | date:'medium'}}</h4>
-						<h4><a href="{{item.url}}">Read the full story</a></h4>
+						<h4><a href="{{item.url}}" target="_blank">Read the full story</a></h4>
 					</li>
 					
 				</ul>
