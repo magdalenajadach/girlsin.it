@@ -1,12 +1,28 @@
-var GirlsInItApp = angular.module('GirlsInItApp', []);
+var GirlsInItApp = angular.module('GirlsInItApp', ['ngRoute']);
 
-GirlsInItApp.controller('GirlsInItController', function($scope, $rootScope, GuardianService, NewYorksTimesService){
+GirlsInItApp.config(function($routeProvider) {
+	$routeProvider
+		.when('/main', {
+			templateUrl: 'views/main.html',
+			controller: 'GirlsInItController'
+		})
+		.when('/about/:id', {
+			templateUrl: 'views/about.html',
+			controller: 'AboutController'
+		})
+		.otherwise({
+			redirectTo: '/main'
+		});
+});
+
+GirlsInItApp.controller('GirlsInItController', function($scope, $rootScope, GuardianService, NewYorksTimesService, WebhoseService){
 	
 	$scope.feed = {};
 	$scope.feed.results = [];
 	$scope.filters = {};
 	$scope.filters.guardianFilter = true;
 	$scope.filters.nytFilter = true;
+	$scope.filters.webhoseFilter = true;
 
 	GuardianService.getPublicFeed().then(function(response){
 		$scope.feed.results = addGuardianToResults($scope.feed.results, response);
@@ -22,9 +38,17 @@ GirlsInItApp.controller('GirlsInItController', function($scope, $rootScope, Guar
 		console.log('No data!');
 	});
 
+	WebhoseService.getPublicFeed().then(function(response){
+		$scope.feed.results = addWebhoseToResults($scope.feed.results, response);
+		console.log($scope.feed);
+	}, function(response){
+		console.log('No data!');
+	});
+
 	$scope.isVisible = function(item) {
 		return (item.source == 'GUARDIAN' && $scope.filters.guardianFilter == true) 
-			|| (item.source == 'NYT' && $scope.filters.nytFilter == true);
+			|| (item.source == 'NYT' && $scope.filters.nytFilter == true)
+			|| (item.source == 'WEBHOSE' && $scope.filters.webhoseFilter == true);
 	};
 
 	function addGuardianToResults(results, response) {
@@ -61,7 +85,28 @@ GirlsInItApp.controller('GirlsInItController', function($scope, $rootScope, Guar
 		return results;
 	}
 
+	function addWebhoseToResults(results, response) {
+		var resultsFromResponse = response.data.posts;
+		for (var i = 0; i < resultsFromResponse.length; i++) {
+			var element = {};
+			element.title = resultsFromResponse[i].thread.title;
+			element.section = resultsFromResponse[i].thread.site_type;
+			element.source = "WEBHOSE";
+			element.date = new Date(resultsFromResponse[i].thread.published);
+			element.url = resultsFromResponse[i].thread.url;
+			results.push(element);
+		}
+		console.log(results);
+		return results;
+	}
+
 });
+
+GirlsInItApp.controller('AboutController', ['$scope', '$routeParams',
+  function($scope, $routeParams) {
+    $scope.aboutId = $routeParams.aboutId;
+  }]);
+
 
 
 GirlsInItApp.factory('GuardianService', ['$http', function($http){
@@ -78,6 +123,16 @@ GirlsInItApp.factory('NewYorksTimesService', ['$http', function($http){
 	var service = {
 		getPublicFeed: function(){
 			var url = 'http://api.nytimes.com/svc/search/v2/articlesearch.json?q=women&fq=tech&sort=newest&api-key=5da3b2f28d4f421da53c9edab39514b4';
+			return $http.get(url); 
+		}
+	};
+	return service;
+}]);
+
+GirlsInItApp.factory('WebhoseService', ['$http', function($http){
+	var service = {
+		getPublicFeed: function(){
+			var url = 'https://webhose.io/search?token=2d6d2276-1f0c-4d89-beca-4a5d4ad1a50d&format=json&q=%22women%20in%20tech%22%20language%3A(english)%20(site_type%3Anews)';
 			return $http.get(url); 
 		}
 	};

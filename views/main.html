@@ -1,0 +1,20 @@
+<input id="guardianSelector" type="checkbox" ng-model="filters.guardianFilter">
+<label for="guardianSelector">Guardian</label>
+<input ng-model="filters.nytFilter" type="checkbox" id="nytSelector">
+<label for="nytSelector">NYT</label>
+<input ng-model="filters.webhoseFilter" type="checkbox" id="webhoseSelector">
+<label for="webhoseSelector">Webhose</label>
+<div>
+	<ul class="list-group">
+		<li class="list-group-item" ng-repeat="item in feed.results" ng-if="isVisible(item)">
+			<h3>{{item.title}}</h3>
+			<h4>Section name: {{item.section}}</h4>
+			<a ng-if="item.source == 'GUARDIAN'" href="http://www.theguardian.com/uk" target="_blank"><span class="badge">Source: The Guardian</span></a>
+			<a ng-if="item.source == 'NYT'" href="http://www.nytimes.com/" target="_blank"><span class="badge">Source: The New York Times</span></a>
+			<a ng-if="item.source == 'WEBHOSE'" href="https://webhose.io/" target="_blank"><span class="badge">Source: Webhose</span></a>
+			<h4>Publication date: {{item.date | date:'medium'}}</h4>
+			<h4><a href="{{item.url}}" target="_blank">Read the full story</a></h4>
+		</li>
+		
+	</ul>
+</div>
