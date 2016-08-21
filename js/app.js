@@ -112,8 +112,8 @@ GirlsInItApp.controller('AboutController', ['$scope', '$routeParams',
 GirlsInItApp.factory('GuardianService', ['$http', function($http){
 	var service = {
 		getPublicFeed: function(){
-			var url = 'http://content.guardianapis.com/search?order-by=newest&q=tech%20and%20women&pageSize=30&api-key=27f66131-9496-4cf7-b259-f054e97beedc';
-			return $http.get(url); 
+			var url = 'http://content.guardianapis.com/search?order-by=newest&section=technology&q=women&pageSize=30&api-key=27f66131-9496-4cf7-b259-f054e97beedc';
+			return $http.get(url);
 		}
 	};
 	return service;
